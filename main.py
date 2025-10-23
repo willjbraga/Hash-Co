@@ -43,6 +43,14 @@ if dados_usuario:
 
     base = carregar_dados()
 
+    pg = st.navigation(
+        {
+            "Home Page": [st.Page("homepage.py", title="Hash&Co")],
+            "Dashboard": [st.Page("dashboard.py", title="Dashboard"), st.Page("indicadores.py", title="Indicadores")],
+            "Conta": [st.Page(logout, title="Sair"), st.Page("criar_conta.py", title="Criar Conta")] 
+        }
+    )
+
     st.title("Hash&Co")
     st.write("Bem vindo, Fulano")
     st.table(base.head(10))
