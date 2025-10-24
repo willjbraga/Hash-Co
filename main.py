@@ -1,20 +1,19 @@
 import streamlit as st
 import pandas as pd
 import streamlit_authenticator as stauth
+from models import session, Usuario
+
+lista_usuarios = session.query(Usuario).all()
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 # Parte de Autenticação usando o streamlit_authenticator 
 
-senhas_criptografadas = stauth.Hasher(["123", "456", "789"]).generate()
-
-credenciais = {"usernames": {
-       "lira@gmail.com": {"name": "Lira", "password": senhas_criptografadas[0]},
-       "alon@gmail.com": {"name": "Alon", "password": senhas_criptografadas[1]},
-       "amanda@gmail.com": {"name": "Amanda", "password": senhas_criptografadas[2]}
-}}
+credenciais = {"usernames": 
+        {usuario.email: {"name": usuario.nome, "password": usuario.senha} for usuario in lista_usuarios}
+}
 
 #Estrutura: credenciais, cookie name, cookie key, cookie expire days
-authenticator = stauth.Authenticate(credenciais, "credenciais_hashco", "123456789abcdefg", cookie_expiry_days=14)
+authenticator = stauth.Authenticate(credenciais, "credenciais_hashco3", "123456789abcdefg", cookie_expiry_days=14)
 
 #O authenticator_status pode ter 3 valores: True(caso esteja tudo certo), False(Caso as credenciais esteja errado) e None(Caso não tenha preenchido)
 def autenticar_usuario(authenticator):
@@ -51,7 +50,7 @@ if dados_usuario:
         }
     )
 
-    pg.run
+    #pg.run
 
     st.title("Hash&Co")
     st.write("Bem vindo, Fulano")

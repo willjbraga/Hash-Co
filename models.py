@@ -15,11 +15,10 @@ class Usuario(Base):
     senha = Column("senha", String)
     admin = Column("admin", Boolean)
 
-    def __init__ (self, nome, email, senha, usuario, admin=False):
+    def __init__ (self, nome, email, senha, admin=False):
         self.nome = nome
         self.email = email
         self.senha = senha
-        self.usuario = usuario
         self.admin = admin
 
 Base.metadata.create_all(bind=db)
