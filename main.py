@@ -51,6 +51,8 @@ if dados_usuario:
         }
     )
 
+    pg.run
+
     st.title("Hash&Co")
     st.write("Bem vindo, Fulano")
     st.table(base.head(10))
